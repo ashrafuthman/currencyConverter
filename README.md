@@ -6,7 +6,7 @@ After cloning, in the project directory, you should run:
 
 ### `npm install`
 
-Intalls all the dependencies.
+Installs all dependencies.
 
 ### `npm start`
 
