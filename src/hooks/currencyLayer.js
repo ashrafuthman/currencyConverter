@@ -10,7 +10,7 @@ export const useCurrencyLayer = (params, dependencies) => {
     const client = new CurrencyLayerClient({apiKey: '531d6475cefb59a4563e9acbef4b0559'});
     if (params && params.dates) {
       const result = [];
-      params.dates.forEach( (date) => {
+      params.dates.forEach((date) => {
         const requestedParams = {currencies: params.currencies, date}
         client.historical(requestedParams).then(response => {
           if (!response.success) {
@@ -21,7 +21,12 @@ export const useCurrencyLayer = (params, dependencies) => {
 
         }).then(() => {
           if (result.length === 7) {
-            setFetchedData(result)
+            const sortedResult = result.slice().sort((a, b) => {
+              var aa = a.date.split('-').reverse().join(),
+                  bb = b.date.split('-').reverse().join();
+              return aa < bb ? -1 : (aa > bb ? 1 : 0);
+          });
+            setFetchedData(sortedResult)
             return setIsLoading(false);
           }
         }
